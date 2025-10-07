@@ -36,6 +36,10 @@ namespace OOP_Lab
 
     class Matrix : Vector
     {
+        protected const int Size = 4;
+        private double[,] _matrix = new double[Size, Size];
+
+        public double[,] Data
         protected double[,] matrix = new double[4, 4];
 
         public override void SetElements()

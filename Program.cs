@@ -11,8 +11,22 @@ namespace OOP_Lab
             Console.WriteLine("Введіть 4 елементи вектора:");
             for (int i = 0; i < 4; i++)
             {
-                Console.Write($"elements[{i}] = ");
-                elements[i] = Convert.ToDouble(Console.ReadLine());
+                double value;
+                while (true)
+                {
+                    Console.Write($"elements[{i}] = ");
+                    string input = Console.ReadLine();
+
+                    if (double.TryParse(input, out value))
+                    {
+                        elements[i] = value;
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Невірне значення! Введіть число ще раз.");
+                    }
+                }
             }
         }
 
@@ -42,11 +56,27 @@ namespace OOP_Lab
         {
             Console.WriteLine("Введіть елементи матриці 4x4:");
             for (int i = 0; i < 4; i++)
+            {
                 for (int j = 0; j < 4; j++)
                 {
-                    Console.Write($"matrix[{i},{j}] = ");
-                    matrix[i, j] = Convert.ToDouble(Console.ReadLine());
+                    double value;
+                    while (true)
+                    {
+                        Console.Write($"matrix[{i},{j}] = ");
+                        string input = Console.ReadLine();
+
+                        if (double.TryParse(input, out value))
+                        {
+                            matrix[i, j] = value;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Невірне значення! Введіть число ще раз.");
+                        }
+                    }
                 }
+            }
         }
 
         public override void Display()

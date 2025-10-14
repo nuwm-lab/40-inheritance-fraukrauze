@@ -2,38 +2,42 @@ using System;
 
 namespace OOP_Lab
 {
+    // Клас "Одновимірний вектор розмірності 4"
     class Vector
     {
         protected double[] elements = new double[4];
 
-        public virtual void SetElements()
+        // Метод задання елементів вектора
+        public virtual void InputElements()
         {
             Console.WriteLine("Введіть 4 елементи вектора:");
             for (int i = 0; i < 4; i++)
             {
-                Console.Write($"elements[{i}] = ");
-                elements[i] = Convert.ToDouble(Console.ReadLine());
+                Console.Write($"Елемент [{i}] = ");
+                elements[i] = double.Parse(Console.ReadLine());
             }
         }
 
+        // Метод виведення вектора
         public virtual void Display()
         {
-            Console.WriteLine("Вектор:");
-            foreach (double e in elements)
-                Console.Write($"{e}\t");
+            Console.Write("Вектор: ");
+            foreach (var item in elements)
+                Console.Write(item + " ");
             Console.WriteLine();
         }
 
+        // Метод знаходження максимального елемента
         public virtual double MaxElement()
         {
             double max = elements[0];
-            for (int i = 1; i < elements.Length; i++)
-                if (elements[i] > max)
-                    max = elements[i];
+            foreach (var item in elements)
+                if (item > max) max = item;
             return max;
         }
     }
 
+    // Похідний клас "Матриця 4x4"
     class Matrix : Vector
     {
         protected const int Size = 4;
@@ -57,36 +61,41 @@ namespace OOP_Lab
             }
         }
         protected double[,] matrix = new double[4, 4];
+        private double[,] matrix = new double[4, 4];
 
-        public override void SetElements()
+        // Перевантажений метод задання елементів матриці
+        public override void InputElements()
         {
             Console.WriteLine("Введіть елементи матриці 4x4:");
             for (int i = 0; i < 4; i++)
+            {
                 for (int j = 0; j < 4; j++)
                 {
-                    Console.Write($"matrix[{i},{j}] = ");
-                    matrix[i, j] = Convert.ToDouble(Console.ReadLine());
+                    Console.Write($"Елемент [{i},{j}] = ");
+                    matrix[i, j] = double.Parse(Console.ReadLine());
                 }
+            }
         }
 
+        // Перевантажений метод виведення матриці
         public override void Display()
         {
-            Console.WriteLine("Матриця:");
+            Console.WriteLine("Матриця 4x4:");
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
-                    Console.Write($"{matrix[i, j]}\t");
+                    Console.Write(matrix[i, j] + "\t");
                 Console.WriteLine();
             }
         }
 
+        // Перевантажений метод знаходження максимального елемента матриці
         public override double MaxElement()
         {
             double max = matrix[0, 0];
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
-                    if (matrix[i, j] > max)
-                        max = matrix[i, j];
+                    if (matrix[i, j] > max) max = matrix[i, j];
             return max;
         }
     }
@@ -97,17 +106,17 @@ namespace OOP_Lab
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Vector vector = new Vector();
-            vector.SetElements();
-            vector.Display();
-            Console.WriteLine($"Максимальний елемент вектора: {vector.MaxElement()}\n");
+            // Об’єкт класу Vector
+            Vector v = new Vector();
+            v.InputElements();
+            v.Display();
+            Console.WriteLine($"Максимальний елемент вектора: {v.MaxElement()}\n");
 
-            Matrix matrix = new Matrix();
-            matrix.SetElements();
-            matrix.Display();
-            Console.WriteLine($"Максимальний елемент матриці: {matrix.MaxElement()}");
-
-            Console.ReadKey();
+            // Об’єкт класу Matrix
+            Matrix m = new Matrix();
+            m.InputElements();
+            m.Display();
+            Console.WriteLine($"Максимальний елемент матриці: {m.MaxElement()}");
         }
     }
 }

@@ -4,69 +4,72 @@ namespace OOP_Lab
 {
     class Vector
     {
-        protected double[] elements = new double[4];
+        protected const int Size = 4;
+        protected double[] _elements = new double[Size];
 
         public virtual void SetElements()
         {
             Console.WriteLine("Введіть 4 елементи вектора:");
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Size; i++)
             {
-                Console.Write($"elements[{i}] = ");
-                elements[i] = Convert.ToDouble(Console.ReadLine());
+                Console.Write($"_elements[{i}] = ");
+                while (!double.TryParse(Console.ReadLine(), out _elements[i]))
+                    Console.Write("Некоректне значення! Введіть число: ");
             }
         }
 
         public virtual void Display()
         {
             Console.WriteLine("Вектор:");
-            foreach (double e in elements)
+            foreach (double e in _elements)
                 Console.Write($"{e}\t");
             Console.WriteLine();
         }
 
         public virtual double MaxElement()
         {
-            double max = elements[0];
-            for (int i = 1; i < elements.Length; i++)
-                if (elements[i] > max)
-                    max = elements[i];
+            double max = _elements[0];
+            for (int i = 1; i < Size; i++)
+                if (_elements[i] > max)
+                    max = _elements[i];
             return max;
         }
     }
 
     class Matrix : Vector
     {
-        protected double[,] matrix = new double[4, 4];
+        protected double[,] _matrix = new double[Size, Size];
 
         public override void SetElements()
         {
             Console.WriteLine("Введіть елементи матриці 4x4:");
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
+            for (int i = 0; i < Size; i++)
+                for (int j = 0; j < Size; j++)
                 {
-                    Console.Write($"matrix[{i},{j}] = ");
-                    matrix[i, j] = Convert.ToDouble(Console.ReadLine());
+                    Console.Write($"_matrix[{i},{j}] = ");
+                    while (!double.TryParse(Console.ReadLine(), out _matrix[i, j]))
+                        Console.Write("Некоректне значення! Введіть число: ");
                 }
         }
 
         public override void Display()
         {
             Console.WriteLine("Матриця:");
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Size; i++)
             {
-                for (int j = 0; j < 4; j++)
-                    Console.Write($"{matrix[i, j]}\t");
+                for (int j = 0; j < Size; j++)
+                    Console.Write($"{_matrix[i, j]}\t");
                 Console.WriteLine();
             }
         }
 
         public override double MaxElement()
         {
-            double max = matrix[0, 0];
-            for (int i = 0; i < 4; i++)
-                for (int j = 0; j < 4; j++)
-                    if (matrix[i, j] > max)
-                        max = matrix[i, j];
+            double max = _matrix[0, 0];
+            for (int i = 0; i < Size; i++)
+                for (int j = 0; j < Size; j++)
+                    if (_matrix[i, j] > max)
+                        max = _matrix[i, j];
             return max;
         }
     }
@@ -91,3 +94,4 @@ namespace OOP_Lab
         }
     }
 }
+

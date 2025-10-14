@@ -2,93 +2,78 @@ using System;
 
 namespace OOP_Lab
 {
-    public class Vector
+    class Vector
     {
-        protected const int Size = 4;
-        private double[] _elements = new double[Size];
+        protected double[] elements = new double[4];
 
         public virtual void SetElements()
         {
-            Console.WriteLine($"Введіть {Size} елементи вектора:");
-            for (int i = 0; i < Size; i++)
+            Console.WriteLine("Введіть 4 елементи вектора:");
+            for (int i = 0; i < 4; i++)
             {
-                Console.Write($"Елемент [{i}] = ");
-                while (!double.TryParse(Console.ReadLine(), out _elements[i]))
-                    Console.Write("Некоректне значення! Введіть число: ");
+                Console.Write($"elements[{i}] = ");
+                elements[i] = Convert.ToDouble(Console.ReadLine());
             }
         }
 
         public virtual void Display()
         {
             Console.WriteLine("Вектор:");
-            foreach (double e in _elements)
+            foreach (double e in elements)
                 Console.Write($"{e}\t");
             Console.WriteLine();
         }
 
         public virtual double MaxElement()
         {
-            double max = _elements[0];
-            for (int i = 1; i < Size; i++)
-                if (_elements[i] > max)
-                    max = _elements[i];
+            double max = elements[0];
+            for (int i = 1; i < elements.Length; i++)
+                if (elements[i] > max)
+                    max = elements[i];
             return max;
         }
     }
 
-    public class Matrix : Vector
+    class Matrix : Vector
     {
-        private double[,] _matrix = new double[Size, Size];
-
-        public double[,] Data
-        {
-            get => _matrix;
-            set
-            {
-                if (value.GetLength(0) == Size && value.GetLength(1) == Size)
-                    _matrix = value;
-                else
-                    throw new ArgumentException($"Матриця повинна бути розміру {Size}x{Size}");
-            }
-        }
+        protected double[,] matrix = new double[4, 4];
 
         public override void SetElements()
         {
-            Console.WriteLine($"Введіть елементи матриці {Size}x{Size}:");
-            for (int i = 0; i < Size; i++)
-                for (int j = 0; j < Size; j++)
+            Console.WriteLine("Введіть елементи матриці 4x4:");
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
                 {
-                    Console.Write($"Елемент [{i},{j}] = ");
-                    while (!double.TryParse(Console.ReadLine(), out _matrix[i, j]))
-                        Console.Write("Некоректне значення! Введіть число: ");
+                    Console.Write($"matrix[{i},{j}] = ");
+                    matrix[i, j] = Convert.ToDouble(Console.ReadLine());
                 }
         }
 
         public override void Display()
         {
             Console.WriteLine("Матриця:");
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < 4; i++)
             {
-                for (int j = 0; j < Size; j++)
-                    Console.Write($"{_matrix[i, j]}\t");
+                for (int j = 0; j < 4; j++)
+                    Console.Write($"{matrix[i, j]}\t");
                 Console.WriteLine();
             }
         }
 
         public override double MaxElement()
         {
-            double max = _matrix[0, 0];
-            for (int i = 0; i < Size; i++)
-                for (int j = 0; j < Size; j++)
-                    if (_matrix[i, j] > max)
-                        max = _matrix[i, j];
+            double max = matrix[0, 0];
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    if (matrix[i, j] > max)
+                        max = matrix[i, j];
             return max;
         }
     }
 
-    public class Program
+    class Program
     {
-        public static void Main()
+        static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -101,6 +86,8 @@ namespace OOP_Lab
             matrix.SetElements();
             matrix.Display();
             Console.WriteLine($"Максимальний елемент матриці: {matrix.MaxElement()}");
+
+            Console.ReadKey();
         }
     }
 }

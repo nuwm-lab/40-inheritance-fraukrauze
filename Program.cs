@@ -12,7 +12,7 @@ namespace OOP_Lab
             Console.WriteLine($"Введіть {Size} елементи вектора:");
             for (int i = 0; i < Size; i++)
             {
-                Console.Write($"_elements[{i}] = ");
+                Console.Write($"Елемент [{i}] = ");
                 while (!double.TryParse(Console.ReadLine(), out _elements[i]))
                     Console.Write("Некоректне значення! Введіть число: ");
             }
@@ -58,7 +58,7 @@ namespace OOP_Lab
             for (int i = 0; i < Size; i++)
                 for (int j = 0; j < Size; j++)
                 {
-                    Console.Write($"_matrix[{i},{j}] = ");
+                    Console.Write($"Елемент [{i},{j}] = ");
                     while (!double.TryParse(Console.ReadLine(), out _matrix[i, j]))
                         Console.Write("Некоректне значення! Введіть число: ");
                 }
@@ -101,10 +101,6 @@ namespace OOP_Lab
             matrix.SetElements();
             matrix.Display();
             Console.WriteLine($"Максимальний елемент матриці: {matrix.MaxElement()}");
-
-#if DEBUG
-            Console.ReadKey();
-#endif
         }
     }
 }

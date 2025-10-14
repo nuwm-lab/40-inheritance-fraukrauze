@@ -5,7 +5,7 @@ namespace OOP_Lab
     public class Vector
     {
         protected const int Size = 4;
-        protected double[] _elements = new double[Size];
+        private double[] _elements = new double[Size];
 
         public virtual void SetElements()
         {
@@ -38,13 +38,11 @@ namespace OOP_Lab
 
     public class Matrix : Vector
     {
-        // Лише одне поле для зберігання даних матриці
-        protected double[,] _matrix = new double[Size, Size];
+        private double[,] _matrix = new double[Size, Size];
 
-        // Опціональна властивість для доступу до даних (можна видалити, якщо не потрібна)
         public double[,] Data
         {
-            get { return _matrix; }
+            get => _matrix;
             set
             {
                 if (value.GetLength(0) == Size && value.GetLength(1) == Size)
@@ -104,7 +102,9 @@ namespace OOP_Lab
             matrix.Display();
             Console.WriteLine($"Максимальний елемент матриці: {matrix.MaxElement()}");
 
+#if DEBUG
             Console.ReadKey();
+#endif
         }
     }
 }

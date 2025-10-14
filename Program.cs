@@ -32,8 +32,10 @@ namespace OOP_Lab1
             Console.WriteLine("Вектор: " + string.Join(", ", elements));
         }
 
-        public virtual double MaxElement() =>
-            elements.Length > 0 ? elements.Max() : double.NaN;
+        public virtual double MaxElement()
+        {
+            return elements.Length > 0 ? elements.Max() : double.NaN;
+        }
     }
 
     public class Matrix : Vector
@@ -70,12 +72,17 @@ namespace OOP_Lab1
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
+                {
                     Console.Write($"{elements[i * cols + j],8}");
+                }
                 Console.WriteLine();
             }
         }
 
-        public override double MaxElement() => base.MaxElement();
+        public override double MaxElement()
+        {
+            return base.MaxElement();
+        }
     }
 
     public static class Program
@@ -84,15 +91,15 @@ namespace OOP_Lab1
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            var v = new Vector();
-            v.InputElements();
-            v.Display();
-            Console.WriteLine($"Максимальний елемент вектора: {v.MaxElement()}\n");
+            var vector = new Vector();
+            vector.InputElements();
+            vector.Display();
+            Console.WriteLine($"Максимальний елемент вектора: {vector.MaxElement()}\n");
 
-            var m = new Matrix();
-            m.InputElements();
-            m.Display();
-            Console.WriteLine($"Максимальний елемент матриці: {m.MaxElement()}");
+            var matrix = new Matrix();
+            matrix.InputElements();
+            matrix.Display();
+            Console.WriteLine($"Максимальний елемент матриці: {matrix.MaxElement()}");
         }
     }
 }

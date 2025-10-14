@@ -32,34 +32,14 @@ namespace OOP_Lab1
             Console.WriteLine("Вектор: " + string.Join(", ", elements));
         }
 
-        public virtual double MaxElement() =>
-            elements.Length > 0 ? elements.Max() : double.NaN;
+        public virtual double MaxElement()
+        {
+            return elements.Length > 0 ? elements.Max() : double.NaN;
+        }
     }
 
     public class Matrix : Vector
     {
-        protected const int Size = 4;
-        private double[,] _matrix = new double[Size, Size];
-
-        public double[,] Data
-        protected double[,] matrix = new double[4, 4];
-        // Лише одне поле для зберігання даних матриці
-        protected double[,] _matrix = new double[Size, Size];
-        private double[,] _matrix = new double[Size, Size];
-
-        public double[,] Data
-        {
-            get => _matrix;
-            set
-            {
-                if (value.GetLength(0) == Size && value.GetLength(1) == Size)
-                    _matrix = value;
-                else
-                    throw new ArgumentException($"Матриця повинна бути розміру {Size}x{Size}");
-            }
-        }
-        protected double[,] matrix = new double[4, 4];
-        private double[,] matrix = new double[4, 4];
         private int rows;
         private int cols;
 
@@ -92,12 +72,17 @@ namespace OOP_Lab1
             for (int i = 0; i < rows; i++)
             {
                 for (int j = 0; j < cols; j++)
+                {
                     Console.Write($"{elements[i * cols + j],8}");
+                }
                 Console.WriteLine();
             }
         }
 
-        public override double MaxElement() => base.MaxElement();
+        public override double MaxElement()
+        {
+            return base.MaxElement();
+        }
     }
 
     public static class Program
@@ -106,15 +91,15 @@ namespace OOP_Lab1
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            var v = new Vector();
-            v.InputElements();
-            v.Display();
-            Console.WriteLine($"Максимальний елемент вектора: {v.MaxElement()}\n");
+            var vector = new Vector();
+            vector.InputElements();
+            vector.Display();
+            Console.WriteLine($"Максимальний елемент вектора: {vector.MaxElement()}\n");
 
-            var m = new Matrix();
-            m.InputElements();
-            m.Display();
-            Console.WriteLine($"Максимальний елемент матриці: {m.MaxElement()}");
+            var matrix = new Matrix();
+            matrix.InputElements();
+            matrix.Display();
+            Console.WriteLine($"Максимальний елемент матриці: {matrix.MaxElement()}");
         }
     }
 }

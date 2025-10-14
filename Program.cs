@@ -2,14 +2,14 @@ using System;
 
 namespace OOP_Lab
 {
-    class Vector
+    public class Vector
     {
         protected const int Size = 4;
         protected double[] _elements = new double[Size];
 
         public virtual void SetElements()
         {
-            Console.WriteLine("Введіть 4 елементи вектора:");
+            Console.WriteLine($"Введіть {Size} елементи вектора:");
             for (int i = 0; i < Size; i++)
             {
                 Console.Write($"_elements[{i}] = ");
@@ -36,18 +36,32 @@ namespace OOP_Lab
         }
     }
 
-    class Matrix : Vector
+    public class Matrix : Vector
     {
         protected const int Size = 4;
         private double[,] _matrix = new double[Size, Size];
 
         public double[,] Data
         protected double[,] matrix = new double[4, 4];
+        // Лише одне поле для зберігання даних матриці
         protected double[,] _matrix = new double[Size, Size];
+
+        // Опціональна властивість для доступу до даних (можна видалити, якщо не потрібна)
+        public double[,] Data
+        {
+            get { return _matrix; }
+            set
+            {
+                if (value.GetLength(0) == Size && value.GetLength(1) == Size)
+                    _matrix = value;
+                else
+                    throw new ArgumentException($"Матриця повинна бути розміру {Size}x{Size}");
+            }
+        }
 
         public override void SetElements()
         {
-            Console.WriteLine("Введіть елементи матриці 4x4:");
+            Console.WriteLine($"Введіть елементи матриці {Size}x{Size}:");
             for (int i = 0; i < Size; i++)
                 for (int j = 0; j < Size; j++)
                 {
@@ -79,9 +93,9 @@ namespace OOP_Lab
         }
     }
 
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -99,4 +113,3 @@ namespace OOP_Lab
         }
     }
 }
-
